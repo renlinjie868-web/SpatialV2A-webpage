@@ -3,109 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <title>SpatialV2A</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
 
-<h1>Spatial Video-to-Audio Generation</h1>
+    <!-- ================= Title ================= -->
+    <section class="title-section">
+      <h1>SpatialV2A: Visual-Guided High-fidelity Spatial Audio Generation</h1>
 
-<p class="notice">
-  Best viewed on desktop. Please use headphones 🎧.
-</p>
+      <div class="links">
+        <a href="https://arxiv.org/abs/2601.15017" target="_blank">📄 Paper</a>
+        <a href="https://github.com/renlinjie868-web/SpatialV2A" target="_blank">💻 Code</a>
+      </div>
+    </section>
 
-<h2>Qualitative Comparison</h2>
+    <!-- ================= Abstract ================= -->
+    <section class="abstract-section">
+      <h2>Abstract</h2>
+      <p>
+        While video-to-audio generation has achieved remarkable progress in semantic and temporal alignment,
+        most existing studies focus solely on these aspects, paying limited attention to the spatial perception
+        and immersive quality of the synthesized audio. This limitation stems largely from current models’
+        reliance on mono audio datasets, which lack the binaural spatial information needed to learn
+        visual-to-spatial audio mappings.
+      </p>
+      <p>
+        To address this gap, we introduce two key contributions: we construct <strong>BinauralVGGSound</strong>,
+        the first large-scale video-binaural audio dataset designed to support spatially aware video-to-audio
+        generation; and we propose an end-to-end spatial audio generation framework guided by visual cues, which
+        explicitly models spatial features. Our framework incorporates a visual-guided audio spatialization
+        module that ensures the generated audio exhibits realistic spatial attributes and layered spatial depth
+        while maintaining semantic and temporal alignment.
+      </p>
+    </section>
 
-<table class="video-table">
-  <thead>
-    <tr>
-      <th class="content-col">Content Type</th>
-      <th class="methods-col">Methods (scroll horizontally)</th>
-    </tr>
-  </thead>
-  <tbody id="video-body">
-    <!-- rows inserted by JS -->
-  </tbody>
-</table>
+    <!-- ================= Pipeline ================= -->
+    <section class="pipeline-section">
+      <h2>Method Pipeline</h2>
+      <div class="pipeline-wrapper">
+        <img src="assets/pipeline.png" alt="SpatialV2A Pipeline">
+      </div>
+    </section>
 
-</div>
+    <!-- ================= Demos ================= -->
+    <section class="demo-section">
+      <h2>Audio-Visual Comparisons</h2>
 
-<script>
-const VIDEO_ROOT = "assets/video";
+      <!-- ===== Header ===== -->
+      <div class="demo-header">
+        <div class="cell text">Content</div>
+        <div class="cell">GT</div>
+        <div class="cell ours">SpatialV2A (Ours)</div>
+        <div class="cell">SEE-2-SOUND</div>
+        <div class="cell">MMAudio</div>
+        <div class="cell">Frieren</div>
+        <div class="cell">Seeing-and-Hearing</div>
+        <div class="cell">ReWaS</div>
+      </div>
 
-const SAMPLES = [
-  "sample01","sample02","sample03","sample04","sample05",
-  "sample06","sample07","sample08","sample09","sample10"
-];
+      <!-- ===== Sample 01 ===== -->
+      <div class="demo-row">
+        <div class="cell text">
+          <pre>A helicopter flying over a city street.</pre>
+        </div>
 
-const METHODS = [
-  "GT",
-  "SpatialV2A",
-  "SEE-2-SOUND",
-  "MMAudio",
-  "Frieren",
-  "Seeing-and-Hearing",
-  "ReWaS"
-];
+        <div class="cell"><video src="video/sample_01/GT.mp4" controls></video></div>
+        <div class="cell ours"><video src="video/sample_01/SpatialV2A.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_01/SEE-2-SOUND.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_01/MMAudio.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_01/Frieren.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_01/Seeing-and-Hearing.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_01/ReWaS.mp4" controls></video></div>
+      </div>
 
-async function loadSamples() {
-  const tbody = document.getElementById("video-body");
+      <div class="demo-row">
+        <div class="cell text">
+          <pre>A helicopter flying over a city street.</pre>
+        </div>
 
-  for (const sample of SAMPLES) {
-    const row = document.createElement("tr");
+        <div class="cell"><video src="video/sample_02/GT.mp4" controls></video></div>
+        <div class="cell ours"><video src="video/sample_02/SpatialV2A.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_02/SEE-2-SOUND.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_02/MMAudio.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_02/Frieren.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_02/Seeing-and-Hearing.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_02/ReWaS.mp4" controls></video></div>
+      </div>
 
-    /* Content */
-    const contentTd = document.createElement("td");
-    contentTd.className = "content-col";
-    try {
-      const resp = await fetch(`${VIDEO_ROOT}/${sample}/content.txt`);
-      contentTd.textContent = (await resp.text()).trim();
-    } catch {
-      contentTd.textContent = "Content not found";
-    }
-    row.appendChild(contentTd);
+      <div class="demo-row">
+        <div class="cell text">
+          <pre>A helicopter flying over a city street.</pre>
+        </div>
 
-    /* Methods */
-    const methodsTd = document.createElement("td");
-    methodsTd.className = "methods-col";
+        <div class="cell"><video src="video/sample_03/GT.mp4" controls></video></div>
+        <div class="cell ours"><video src="video/sample_03/SpatialV2A.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_03/SEE-2-SOUND.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_03/MMAudio.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_03/Frieren.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_03/Seeing-and-Hearing.mp4" controls></video></div>
+        <div class="cell"><video src="video/sample_03/ReWaS.mp4" controls></video></div>
+      </div>
 
-    const scrollDiv = document.createElement("div");
-    scrollDiv.className = "method-scroll";
+      <!-- 复制 demo-row，替换为 sample_02 ~ sample_10 -->
+    </section>
 
-    for (const method of METHODS) {
-      const block = document.createElement("div");
-      block.className = "method-block";
-      if (method === "SpatialV2A") block.classList.add("ours");
+    <!-- ================= Citation ================= -->
+    <section class="citation-section">
+      <h2>Citation</h2>
+      <pre><code>@misc{wang2026spatialv2avisualguidedhighfidelityspatial,
+        title={SpatialV2A: Visual-Guided High-fidelity Spatial Audio Generation},
+        author={Yanan Wang and Linjie Ren and Zihao Li and Junyi Wang and Tian Gan},
+        year={2026},
+        eprint={2601.15017},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2601.15017},
+      }</code></pre>
+    </section>
 
-      const label = document.createElement("div");
-      label.className = "method-label";
-      label.textContent = method === "SpatialV2A" ? "SpatialV2A (Ours)" : method;
-
-      const video = document.createElement("video");
-      video.controls = true;
-      video.muted = true;
-      video.loop = true;
-
-      const source = document.createElement("source");
-      source.src = `${VIDEO_ROOT}/${sample}/${method}.mp4`;
-      source.type = "video/mp4";
-
-      video.appendChild(source);
-
-      block.appendChild(label);
-      block.appendChild(video);
-      scrollDiv.appendChild(block);
-    }
-
-    methodsTd.appendChild(scrollDiv);
-    row.appendChild(methodsTd);
-    tbody.appendChild(row);
-  }
-}
-
-loadSamples();
-</script>
-
+  </div>
 </body>
 </html>
