@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SpatialV2A</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
@@ -12,52 +12,33 @@
 <h1>Spatial Video-to-Audio Generation</h1>
 
 <p class="notice">
-  Please use headphones 🎧 for better spatial perception.
+  Best viewed on desktop. Please use headphones 🎧.
 </p>
 
 <h2>Qualitative Comparison</h2>
 
-<table id="video-table">
+<table class="video-table">
   <thead>
     <tr>
-      <th>Content Type</th>
-      <th>GT</th>
-      <th><b>SpatialV2A (Ours)</b></th>
-      <th>SEE-2-SOUND</th>
-      <th>MMAudio</th>
-      <th>Frieren</th>
-      <th>Seeing-and-Hearing</th>
-      <th>ReWaS</th>
+      <th class="content-col">Content Type</th>
+      <th class="methods-col">Methods (scroll horizontally)</th>
     </tr>
   </thead>
-  <tbody>
-    <!-- rows will be inserted automatically -->
+  <tbody id="video-body">
+    <!-- rows inserted by JS -->
   </tbody>
 </table>
 
 </div>
 
 <script>
-/* ================== CONFIG ================== */
-
-// 你的视频根目录
 const VIDEO_ROOT = "assets/video";
 
-// 10 个 sample 目录名（必须和文件夹名一致）
 const SAMPLES = [
-  "sample01",
-  "sample02",
-  "sample03",
-  "sample04",
-  "sample05",
-  "sample06",
-  "sample07",
-  "sample08",
-  "sample09",
-  "sample10"
+  "sample01","sample02","sample03","sample04","sample05",
+  "sample06","sample07","sample08","sample09","sample10"
 ];
 
-// 方法名（= mp4 文件名）
 const METHODS = [
   "GT",
   "SpatialV2A",
@@ -68,43 +49,57 @@ const METHODS = [
   "ReWaS"
 ];
 
-/* ================== LOGIC ================== */
-
 async function loadSamples() {
-  const tbody = document.querySelector("#video-table tbody");
+  const tbody = document.getElementById("video-body");
 
   for (const sample of SAMPLES) {
     const row = document.createElement("tr");
 
-    /* -------- Content Type (txt) -------- */
-    const contentCell = document.createElement("td");
+    /* Content */
+    const contentTd = document.createElement("td");
+    contentTd.className = "content-col";
     try {
       const resp = await fetch(`${VIDEO_ROOT}/${sample}/content.txt`);
-      contentCell.textContent = await resp.text();
-    } catch (e) {
-      contentCell.textContent = "Content not found";
+      contentTd.textContent = (await resp.text()).trim();
+    } catch {
+      contentTd.textContent = "Content not found";
     }
-    row.appendChild(contentCell);
+    row.appendChild(contentTd);
 
-    /* -------- Videos -------- */
+    /* Methods */
+    const methodsTd = document.createElement("td");
+    methodsTd.className = "methods-col";
+
+    const scrollDiv = document.createElement("div");
+    scrollDiv.className = "method-scroll";
+
     for (const method of METHODS) {
-      const cell = document.createElement("td");
+      const block = document.createElement("div");
+      block.className = "method-block";
+      if (method === "SpatialV2A") block.classList.add("ours");
+
+      const label = document.createElement("div");
+      label.className = "method-label";
+      label.textContent = method === "SpatialV2A" ? "SpatialV2A (Ours)" : method;
 
       const video = document.createElement("video");
       video.controls = true;
       video.muted = true;
       video.loop = true;
-      video.width = 160;
 
       const source = document.createElement("source");
       source.src = `${VIDEO_ROOT}/${sample}/${method}.mp4`;
       source.type = "video/mp4";
 
       video.appendChild(source);
-      cell.appendChild(video);
-      row.appendChild(cell);
+
+      block.appendChild(label);
+      block.appendChild(video);
+      scrollDiv.appendChild(block);
     }
 
+    methodsTd.appendChild(scrollDiv);
+    row.appendChild(methodsTd);
     tbody.appendChild(row);
   }
 }

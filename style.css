@@ -1,42 +1,119 @@
+/* ===== Global ===== */
 body {
-  font-family: Arial, sans-serif;
-  background: #ffffff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #fafafa;
   color: #222;
 }
 
 .container {
-  width: 98%;
-  margin: auto;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-h1, h2 {
+/* ===== Titles ===== */
+h1 {
   text-align: center;
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin: 40px 0 20px;
 }
 
 .notice {
   text-align: center;
   font-style: italic;
-  margin-bottom: 20px;
+  color: #555;
 }
 
+/* ===== Table ===== */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  overflow: hidden;
 }
 
 th, td {
-  border: 1px solid #ddd;
-  padding: 6px;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+th {
+  background: #f2f4f8;
+  font-weight: 600;
+  text-align: left;
+}
+
+.content-col {
+  width: 260px;
+  font-weight: 500;
+}
+
+.methods-col {
+  padding: 0;
+}
+
+/* ===== Horizontal Scroll ===== */
+.method-scroll {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.method-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.method-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 5px;
+}
+
+.method-scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+/* ===== Method Block ===== */
+.method-block {
+  flex: 0 0 auto;
   text-align: center;
-  vertical-align: middle;
+}
+
+.method-label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #444;
 }
 
 video {
-  width: 160px;
+  width: 180px;
+  border-radius: 6px;
+  background: #000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 高亮 Ours */
-th:nth-child(3),
-td:nth-child(3) {
-  background-color: #f5faff;
+video:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* ===== Highlight Ours ===== */
+.method-block.ours .method-label {
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.method-block.ours video {
+  box-shadow: 0 0 0 2px #cfe4ff;
 }
