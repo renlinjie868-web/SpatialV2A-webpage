@@ -1,51 +1,42 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    color: #222;
-  }
-  
-  .container {
-    width: 900px;
-    margin: auto;
-  }
-  
-  h1, h2 {
-    text-align: center;
-  }
-  
-  .authors {
-    text-align: center;
-    font-style: italic;
-  }
-  
-  .links {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .links a {
-    margin: 0 10px;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
-  .notice {
-    text-align: center;
-    font-style: italic;
-  }
-  
-  audio {
-    width: 100%;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 40px;
-  }
-  
-  td, th {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
-  
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+.container {
+  width: 98%;
+  margin: auto;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.notice {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+video {
+  width: 160px;
+}
+
+/* 高亮 Ours */
+th:nth-child(3),
+td:nth-child(3) {
+  background-color: #f5faff;
+}

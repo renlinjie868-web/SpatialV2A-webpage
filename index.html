@@ -11,60 +11,106 @@
 
 <h1>Spatial Video-to-Audio Generation</h1>
 
-<p class="authors">
-  Anonymous Authors
-</p>
-
-<div class="links">
-  <a href="https://arxiv.org/pdf/2601.15017">Paper</a>
-</div>
-
 <p class="notice">
   Please use headphones 🎧 for better spatial perception.
 </p>
 
-<hr>
+<h2>Qualitative Comparison</h2>
 
-<h2>Audio Comparison</h2>
-
-<div class="audio-sample">
-  <p><b>Example 1:</b> Helicopter flying from left to right</p>
-
-  <table>
+<table id="video-table">
+  <thead>
     <tr>
-      <th>Method</th>
-      <th>Audio</th>
+      <th>Content Type</th>
+      <th>GT</th>
+      <th><b>SpatialV2A (Ours)</b></th>
+      <th>SEE-2-SOUND</th>
+      <th>MMAudio</th>
+      <th>Frieren</th>
+      <th>Seeing-and-Hearing</th>
+      <th>ReWaS</th>
     </tr>
+  </thead>
+  <tbody>
+    <!-- rows will be inserted automatically -->
+  </tbody>
+</table>
 
-    <tr>
-      <td>Ground Truth</td>
-      <td>
-        <audio controls>
-          <source src="assets/audio/sample1/gt.wav" type="audio/wav">
-        </audio>
-      </td>
-    </tr>
-
-    <tr>
-      <td>Baseline</td>
-      <td>
-        <audio controls>
-          <source src="assets/audio/sample1/baseline.wav" type="audio/wav">
-        </audio>
-      </td>
-    </tr>
-
-    <tr>
-      <td><b>Ours</b></td>
-      <td>
-        <audio controls>
-          <source src="assets/audio/sample1/ours.wav" type="audio/wav">
-        </audio>
-      </td>
-    </tr>
-  </table>
 </div>
 
-</div>
+<script>
+/* ================== CONFIG ================== */
+
+// 你的视频根目录
+const VIDEO_ROOT = "assets/video";
+
+// 10 个 sample 目录名（必须和文件夹名一致）
+const SAMPLES = [
+  "sample01",
+  "sample02",
+  "sample03",
+  "sample04",
+  "sample05",
+  "sample06",
+  "sample07",
+  "sample08",
+  "sample09",
+  "sample10"
+];
+
+// 方法名（= mp4 文件名）
+const METHODS = [
+  "GT",
+  "SpatialV2A",
+  "SEE-2-SOUND",
+  "MMAudio",
+  "Frieren",
+  "Seeing-and-Hearing",
+  "ReWaS"
+];
+
+/* ================== LOGIC ================== */
+
+async function loadSamples() {
+  const tbody = document.querySelector("#video-table tbody");
+
+  for (const sample of SAMPLES) {
+    const row = document.createElement("tr");
+
+    /* -------- Content Type (txt) -------- */
+    const contentCell = document.createElement("td");
+    try {
+      const resp = await fetch(`${VIDEO_ROOT}/${sample}/content.txt`);
+      contentCell.textContent = await resp.text();
+    } catch (e) {
+      contentCell.textContent = "Content not found";
+    }
+    row.appendChild(contentCell);
+
+    /* -------- Videos -------- */
+    for (const method of METHODS) {
+      const cell = document.createElement("td");
+
+      const video = document.createElement("video");
+      video.controls = true;
+      video.muted = true;
+      video.loop = true;
+      video.width = 160;
+
+      const source = document.createElement("source");
+      source.src = `${VIDEO_ROOT}/${sample}/${method}.mp4`;
+      source.type = "video/mp4";
+
+      video.appendChild(source);
+      cell.appendChild(video);
+      row.appendChild(cell);
+    }
+
+    tbody.appendChild(row);
+  }
+}
+
+loadSamples();
+</script>
+
 </body>
 </html>
