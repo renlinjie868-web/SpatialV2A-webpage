@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SpatialV2A: Visual-Guided High-fidelity Spatial Audio Generation — demo page with audio-visual comparisons.">
   <title>SpatialV2A</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -14,18 +16,22 @@
       <h1>SpatialV2A: Visual-Guided High-fidelity Spatial Audio Generation</h1>
 
       <div class="links">
-        <a href="https://arxiv.org/abs/2601.15017" target="_blank">📄 Paper</a>
-        <a href="https://github.com/renlinjie868-web/SpatialV2A" target="_blank">💻 Code</a>
+        <a href="https://arxiv.org/abs/2601.15017" target="_blank" rel="noopener noreferrer">📄 Paper</a>
+        <a href="https://github.com/renlinjie868-web/SpatialV2A" target="_blank" rel="noopener noreferrer">💻 Code</a>
+      </div>
+
+      <div class="notice">
+        🎧 Best experienced with headphones. Videos may take time to load depending on network.
       </div>
     </section>
 
     <!-- ================= Abstract ================= -->
     <section class="abstract-section">
-      <h2>Abstract</h2>
+      <h2 class="section-title">Abstract</h2>
       <p>
         While video-to-audio generation has achieved remarkable progress in semantic and temporal alignment,
         most existing studies focus solely on these aspects, paying limited attention to the spatial perception
-        and immersive quality of the synthesized audio. This limitation stems largely from current models’
+        and immersive quality of the synthesized audio. This limitation stems largely from current models
         reliance on mono audio datasets, which lack the binaural spatial information needed to learn
         visual-to-spatial audio mappings.
       </p>
@@ -41,77 +47,34 @@
 
     <!-- ================= Pipeline ================= -->
     <section class="pipeline-section">
-      <h2>Method Pipeline</h2>
       <div class="pipeline-wrapper">
-        <img src="assets/pipeline.png" alt="SpatialV2A Pipeline">
+        <h2 class="section-title">Method Pipeline</h2>
+        <figure class="figure">
+          <img src="assets/pipeline.png" alt="SpatialV2A Pipeline">
+        </figure>
       </div>
     </section>
 
     <!-- ================= Demos ================= -->
     <section class="demo-section">
-      <h2>Audio-Visual Comparisons</h2>
-
-      <!-- ===== Header ===== -->
-      <div class="demo-header">
-        <div class="cell text">Content</div>
-        <div class="cell">GT</div>
-        <div class="cell ours">SpatialV2A (Ours)</div>
-        <div class="cell">SEE-2-SOUND</div>
-        <div class="cell">MMAudio</div>
-        <div class="cell">Frieren</div>
-        <div class="cell">Seeing-and-Hearing</div>
-        <div class="cell">ReWaS</div>
-      </div>
-
-      <!-- ===== Sample 01 ===== -->
-      <div class="demo-row">
-        <div class="cell text">
-          <pre>A helicopter flying over a city street.</pre>
+      <div class="demo-card">
+        <div class="section-head">
+          <h2 class="section-title">Audio-Visual Comparisons</h2>
         </div>
 
-        <div class="cell"><video src="video/sample_01/GT.mp4" controls></video></div>
-        <div class="cell ours"><video src="video/sample_01/SpatialV2A.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_01/SEE-2-SOUND.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_01/MMAudio.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_01/Frieren.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_01/Seeing-and-Hearing.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_01/ReWaS.mp4" controls></video></div>
-      </div>
-
-      <div class="demo-row">
-        <div class="cell text">
-          <pre>A helicopter flying over a city street.</pre>
+        <div id="demo-scroll" class="demo-scroll" role="region" aria-label="Audio-Visual comparisons table" tabindex="0">
+          <div class="demo-loading">Scanning <code>video/</code> for samples…</div>
         </div>
-
-        <div class="cell"><video src="video/sample_02/GT.mp4" controls></video></div>
-        <div class="cell ours"><video src="video/sample_02/SpatialV2A.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_02/SEE-2-SOUND.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_02/MMAudio.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_02/Frieren.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_02/Seeing-and-Hearing.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_02/ReWaS.mp4" controls></video></div>
       </div>
 
-      <div class="demo-row">
-        <div class="cell text">
-          <pre>A helicopter flying over a city street.</pre>
-        </div>
-
-        <div class="cell"><video src="video/sample_03/GT.mp4" controls></video></div>
-        <div class="cell ours"><video src="video/sample_03/SpatialV2A.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_03/SEE-2-SOUND.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_03/MMAudio.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_03/Frieren.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_03/Seeing-and-Hearing.mp4" controls></video></div>
-        <div class="cell"><video src="video/sample_03/ReWaS.mp4" controls></video></div>
-      </div>
-
-      <!-- 复制 demo-row，替换为 sample_02 ~ sample_10 -->
+      <noscript>
+        <p class="demo-noscript">JavaScript is required to render the comparison table.</p>
+      </noscript>
     </section>
 
     <!-- ================= Citation ================= -->
     <section class="citation-section">
-      <h2>Citation</h2>
+      <h2 class="section-title">Citation</h2>
       <pre><code>@misc{wang2026spatialv2avisualguidedhighfidelityspatial,
         title={SpatialV2A: Visual-Guided High-fidelity Spatial Audio Generation},
         author={Yanan Wang and Linjie Ren and Zihao Li and Junyi Wang and Tian Gan},
@@ -124,5 +87,145 @@
     </section>
 
   </div>
+
+  <script>
+    (function () {
+      const METHODS = [
+        { key: "GT", label: "GT", file: "GT.mp4" },
+        { key: "OURS", label: "SpatialV2A (Ours)", file: "SpatialV2A.mp4", highlight: true },
+        { key: "SEE2SOUND", label: "SEE-2-SOUND", file: "SEE-2-SOUND.mp4" },
+        { key: "MMAUDIO", label: "MMAudio", file: "MMAudio.mp4" },
+        { key: "FRIEREN", label: "Frieren", file: "Frieren.mp4" },
+        { key: "SEEHEAR", label: "Seeing-and-Hearing", file: "Seeing-and-Hearing.mp4" },
+        { key: "REWAS", label: "ReWaS", file: "ReWaS.mp4" }
+      ];
+
+      const MAX_SAMPLES = 30;
+      const BASE_PATH = "video";
+
+      async function fileExists(url) {
+        try {
+          const res = await fetch(url, { method: "HEAD" });
+          return res.ok;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      async function loadSamples() {
+        const scroll = document.getElementById("demo-scroll");
+        if (!scroll) return;
+
+        const samples = [];
+        let foundCount = 0;
+        for (let i = 1; i <= MAX_SAMPLES; i++) {
+          const id = String(i).padStart(2, "0");
+          const prefix = BASE_PATH + "/sample_" + id;
+          const hasGT = await fileExists(prefix + "/GT.mp4");
+          if (!hasGT) {
+            if (foundCount > 0) break;
+            continue;
+          }
+
+          let prompt = "";
+          let displayId = "";
+          try {
+            const res = await fetch(prefix + "/content.txt");
+            if (res.ok) {
+              prompt = (await res.text()).trim();
+            }
+          } catch (e) {}
+
+          try {
+            const resId = await fetch(prefix + "/id.txt");
+            if (resId.ok) {
+              displayId = (await resId.text()).trim();
+            }
+          } catch (e) {}
+
+          samples.push({
+            id,
+            prefix,
+            prompt: prompt || ("Sample " + id),
+            displayId: displayId || ("Sample " + id)
+          });
+          foundCount++;
+        }
+
+        if (!samples.length) {
+          scroll.innerHTML = "<div class=\"demo-empty\">No samples detected under <code>./video</code>.</div>";
+          return;
+        }
+
+        const frag = document.createDocumentFragment();
+
+        const header = document.createElement("div");
+        header.className = "demo-grid demo-grid--header";
+
+        const headContent = document.createElement("div");
+        headContent.className = "cell cell--content";
+        headContent.textContent = "Content";
+        header.appendChild(headContent);
+
+        METHODS.forEach((m) => {
+          const c = document.createElement("div");
+          c.className = "cell" + (m.highlight ? " cell--ours" : "");
+          c.textContent = m.label;
+          header.appendChild(c);
+        });
+
+        frag.appendChild(header);
+
+        samples.forEach((sample) => {
+          const row = document.createElement("div");
+          row.className = "demo-grid";
+
+          const contentCell = document.createElement("div");
+          contentCell.className = "cell cell--content";
+
+          const promptDiv = document.createElement("div");
+          promptDiv.className = "prompt";
+
+          const idLine = document.createElement("div");
+          idLine.className = "prompt-id";
+          idLine.textContent = sample.displayId;
+
+          const textLine = document.createElement("div");
+          textLine.className = "prompt-text";
+          textLine.textContent = sample.prompt;
+
+          promptDiv.appendChild(idLine);
+          promptDiv.appendChild(textLine);
+
+          contentCell.appendChild(promptDiv);
+          row.appendChild(contentCell);
+
+          METHODS.forEach((m) => {
+            const cell = document.createElement("div");
+            cell.className = "cell" + (m.highlight ? " cell--ours" : "");
+            const v = document.createElement("video");
+            v.controls = true;
+            v.preload = "auto";
+            v.playsInline = true;
+            v.src = sample.prefix + "/" + m.file;
+            cell.appendChild(v);
+            row.appendChild(cell);
+          });
+
+          frag.appendChild(row);
+        });
+
+        scroll.innerHTML = "";
+        scroll.appendChild(frag);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadSamples);
+      } else {
+        loadSamples();
+      }
+    })();
+  </script>
+
 </body>
 </html>
